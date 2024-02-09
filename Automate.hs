@@ -1,3 +1,5 @@
+module Automate(createAlphabet, createNode, createTransition, createAutomate, executeAutomate, Automate) where 
+
 -- ALPHABET
 
 newtype Alphabet = Alphabet [String]
@@ -18,6 +20,9 @@ instance Eq Transition where
     (Transition input1 output1) == (Transition input2 output2) = input1 == input2 && output1 == output2
 instance Show Transition where
     show (Transition input output) = "t:" ++ show input ++ "->" ++ show output
+
+createTransition :: String -> Int -> Transition
+createTransition = Transition
 
 checkTransition :: Transition -> String -> Bool
 checkTransition (Transition l n) w = l == w
