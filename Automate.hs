@@ -3,13 +3,12 @@ module Automate(createAlphabet, createNode, createTransition, createAutomate, ex
 -- ALPHABET
 
 newtype Alphabet = Alphabet [String]
+instance Show Alphabet where
+    show (Alphabet alphabet) = show alphabet
 
 -- create alphabet
 createAlphabet :: [String] -> Alphabet
 createAlphabet = Alphabet
-
-instance Show Alphabet where
-    show (Alphabet alphabet) = show alphabet
 
 
 
@@ -33,16 +32,12 @@ checkTransition (Transition l n) w = l == w
 data Node = Node String [Transition]
 instance Eq Node where
     (Node name1 transitions1) == (Node name2 transitions2) = name1 == name2 && transitions1 == transitions2
-
 instance Show Node where
     show (Node name transitions) = show name ++ show transitions
 
 -- Create a node with the given transition function
 createNode :: String -> [Transition] -> Node
 createNode = Node
--- -- Adds a transition to an existing node    
--- addTransition :: Node -> Transition -> Node
--- addTransition (Node transitions) transition = Node (transitions ++ [transition])
 
 --Get the output node from an input String 
 getOutputNodeIndex :: Node -> String -> Int
@@ -52,10 +47,10 @@ getOutputNodeIndex (Node _ transitions) input = getOutputNodeIndex' transitions 
         getOutputNodeIndex' [] _ = error "No transition found"
         getOutputNodeIndex' (transition@(Transition _ output):transitions) input = if checkTransition transition input then output else getOutputNodeIndex' transitions input
 
+
 -- AUTOMATE
 
 data Automate = Automate {alphabet:: Alphabet, startState:: Node, finalStates:: [Node], nodes::[Node]}
-
 instance Show Automate where
     show (Automate _ _ _ nodes) = show nodes
 

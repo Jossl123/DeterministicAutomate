@@ -1,21 +1,6 @@
 module Main where
 import Automate
 
--- main :: IO ()
--- main = do
---     let alphabet = createAlphabet ["a", "b"]
---     let node1 = createNode "node1" [createTransition "a" 0, createTransition "b" 1]
---     let node2 = createNode "node2" [createTransition "a" 1, createTransition "b" 0]
---     let nodes = [node1, node2]
---     let startState = node1
---     let finalStates = [node2]
---     let automate = createAutomate alphabet nodes startState finalStates
---     print automate
---     print $ executeAutomate automate "a"
---     print $ executeAutomate automate "b"
---     print $ executeAutomate automate "ab"
---     print $ executeAutomate automate "ba"
-
 automateMultiplesOfTen :: Automate
 automateMultiplesOfTen = createAutomate alphabet [a, b] a [b]
     where
